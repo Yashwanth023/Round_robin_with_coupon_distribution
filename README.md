@@ -1,4 +1,3 @@
-
 # Round-Robin Coupon Distribution System
 
 A fair coupon distribution system with built-in abuse prevention mechanisms.
