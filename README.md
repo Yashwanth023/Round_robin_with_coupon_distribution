@@ -1,69 +1,67 @@
-# Welcome to your Lovable project
 
-## Project info
+# Round-Robin Coupon Distribution System
 
-**URL**: https://lovable.dev/projects/71106973-7c49-4dd1-b66c-b2022c79b0db
+A fair coupon distribution system with built-in abuse prevention mechanisms.
 
-## How can I edit this code?
+## Project Overview
 
-There are several ways of editing your application.
+This application demonstrates a round-robin coupon distribution system with mechanisms to prevent abuse. Users can claim coupons without requiring login, while the system prevents multiple claims within a restricted time frame.
 
-**Use Lovable**
+### Key Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/71106973-7c49-4dd1-b66c-b2022c79b0db) and start prompting.
+- **Round-Robin Distribution**: Ensures fair distribution of coupons in a circular queue
+- **Abuse Prevention**:
+  - IP address tracking
+  - Browser fingerprinting
+  - Time-based restrictions (one claim per hour)
+- **Guest Access**: No login required to claim coupons
+- **User-Friendly Interface**: Clear feedback and intuitive design
 
-Changes made via Lovable will be committed automatically to this repo.
+## Technology Stack
 
-**Use your preferred IDE**
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui components
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Running the Project
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Implementation Details
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Coupon Distribution
 
-**Use GitHub Codespaces**
+The application maintains a list of available coupons and distributes them in a round-robin fashion:
+- A circular queue system tracks the current coupon position
+- When a user requests a coupon, they receive the next available coupon in the queue
+- The pointer moves to the next position after each request
+- This ensures that each coupon gets an equal opportunity to be claimed
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Abuse Prevention
 
-## What technologies are used for this project?
+To prevent multiple claims by the same user:
+- **IP Tracking**: Records each user's IP address and restricts subsequent claims
+- **Time Restrictions**: Implements a cooldown period (1 hour) between claims from the same user
+- **Browser Fingerprinting**: Uses device characteristics to identify users across sessions
 
-This project is built with .
+### Demo Reset
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+For demonstration purposes, the application includes reset functionality to:
+- Reset all claimed coupons back to unclaimed status
+- Clear the tracking history
+- Allow testing the full functionality
 
-## How can I deploy this project?
+## Production Considerations
 
-Simply open [Lovable](https://lovable.dev/projects/71106973-7c49-4dd1-b66c-b2022c79b0db) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+For a production environment, consider:
+- Server-side implementation of abuse prevention logic
+- Database integration for coupon and user tracking data
+- Additional rate limiting mechanisms
+- Ensuring HTTPS for secure connections
